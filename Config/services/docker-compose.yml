@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  user-service:
+    image: user-service:0.0.2
+    container_name: users
+    ports:
+      - "3002:3000"
+    env_file:
+      - .env
+    networks:
+      - service_network
+  
+  email-service:
+    image: email-service:0.0.2
+    container_name: email
+    ports:
+      - "3003:3000"
+    env_file:
+      - .env
+    networks:
+      - service_network
+
+  product-service:
+    image: product-service:0.0.1
+    container_name: products
+    ports:
+      - "3004:3000"
+    env_file:
+      - .env
+    networks:
+      - service_network
+      
+networks:
+  service_network:
+    driver: bridge
+    name: service_network
+    
+   
